@@ -9,26 +9,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name="userinfo", urlPatterns={"/UserInfo"})
-public class UserInfo extends HttpServlet {
+import Service.ParticipantDao;
+import jpaModel.Participant;
+
+@WebServlet(name="adduser", urlPatterns={"/AddedUser"})
+public class AddUser extends HttpServlet {
+	
+	
 	public void doPost(HttpServletRequest request,
 			HttpServletResponse response)
 					throws ServletException, IOException {
 		response.setContentType("text/html");
 
 		PrintWriter out = response.getWriter();
+		
+		ParticipantDao pdao = new ParticipantDao();
+		
+		Participant p = new Participant(request.getParameter("firstname"),request.getParameter("name"), request.getParameter("email"));
+		
+		pdao.addParticipant(p);
+		
+		response.sendRedirect("/allUsers");
+		
+		
+		
 
-
-		out.println("<HTML>\n<BODY>\n" +
-				"<H1>Recapitulatif des informations</H1>\n" +
-				"<UL>\n" +			
-				" <LI>Nom: "
-				+ request.getParameter("name") + "\n" +
-				" <LI>Prenom: "
-				+ request.getParameter("firstname") + "\n" +
-				" <LI>Age: "
-				+ request.getParameter("age") + "\n" +
-				"</UL>\n" +				
-				"</BODY></HTML>");
 	}
+	
+	
 }
