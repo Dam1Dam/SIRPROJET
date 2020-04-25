@@ -13,16 +13,23 @@ public class ParticipantDao {
 	public List<Participant> findByFirstName(String firstName){
 		
 		return EntityManagerHelper.getEntityManager()
-				.createQuery("select p from participant as p where p.prenom = :prenom", Participant.class)
+				.createQuery("select p from Participant as p where p.prenom = :prenom", Participant.class)
 				.setParameter("prenom", firstName).getResultList();
 		
 	}
 	public List<Participant> findAll(){
 		
 		return EntityManagerHelper.getEntityManager()
-				.createQuery("select p from participant as p", Participant.class)
+				.createQuery("select p from Participant as p", Participant.class)
 				.getResultList();
 		
+	}
+	
+	public int findNumberParticipant() {
+		
+		return EntityManagerHelper.getEntityManager()
+				.createQuery("select p from Participant p", Participant.class)
+				.getResultList().size();
 	}
 	
 	public void addParticipant(Participant p) {

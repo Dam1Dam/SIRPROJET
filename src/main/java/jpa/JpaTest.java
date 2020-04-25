@@ -18,14 +18,28 @@ public class JpaTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {	
+				
 		
 		ParticipantDao pdao = new ParticipantDao();
 		
-		Participant p = new Participant("damien", "cantin", "damien.cantin@gmail.com");
+		Participant p = new Participant("cantin", "damien", "damien.cantin@gmail.com");
 		
 		pdao.addParticipant(p);
+		
+		p = new Participant("dulac", "damien", "damien.dulac@gmail.com");
+		
+		pdao.addParticipant(p);
+		
 
-
+		List<Participant> truc = pdao.findAll();
+		
+		for (Participant part : truc) {
+			System.out.println(part.toString());
+		}
+		
+		
+		System.out.println(pdao.findNumberParticipant());
+		
 
 	}
 

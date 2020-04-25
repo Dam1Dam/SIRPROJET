@@ -6,8 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Entity
+@Table(name = "Participant")
 public class Participant implements Serializable{
 
 
@@ -29,6 +32,11 @@ public class Participant implements Serializable{
 	private String prefAlim;
 
 	private String allergies;
+	
+	
+	public Participant() {
+		
+	}
 
 	public Participant(String nom, String prenom, String mail) {
 		this.nom=nom;
@@ -84,6 +92,11 @@ public class Participant implements Serializable{
 
 	public void setPrefAlim(String prefAlim) {
 		this.prefAlim = prefAlim;
+	}
+	
+	public String toString() {
+		
+		return this.getNom() + " "+ this.getPrenom()+ " "+ this.getMail();
 	}
 
 
