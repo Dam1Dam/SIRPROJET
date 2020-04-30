@@ -31,12 +31,12 @@ public class JpaTest {
 		pdao.addParticipant(p);
 		
 
-		List<Participant> truc = pdao.findAll();
+		/*List<Participant> truc = pdao.findAll();
 		
 		for (Participant part : truc) {
 			System.out.println(part.toString());
 		}
-		
+		*/
 		
 		System.out.println(pdao.findNumberParticipant());
 		

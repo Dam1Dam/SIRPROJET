@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import Service.ParticipantDao;
 import jpaModel.Participant;
 
-@WebServlet(name="adduser", urlPatterns={"/AddedUser"})
+@WebServlet(name="adduser", urlPatterns={"/AddUser"})
 public class AddUser extends HttpServlet {
 	
 	
@@ -25,7 +25,7 @@ public class AddUser extends HttpServlet {
 		
 		ParticipantDao pdao = new ParticipantDao();
 		
-		Participant p = new Participant(request.getParameter("firstname"),request.getParameter("name"), request.getParameter("email"));
+		Participant p = new Participant(request.getParameter("name").toString(),request.getParameter("firstname").toString(), request.getParameter("email").toString());
 		
 		pdao.addParticipant(p);
 		

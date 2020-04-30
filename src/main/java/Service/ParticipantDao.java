@@ -6,7 +6,7 @@ import jpaModel.Participant;
 
 public class ParticipantDao {
 	
-	public Participant findById(int id) {
+	public Participant findById(Long id) {
 		return EntityManagerHelper.getEntityManager().find(Participant.class, id);
 	}
 	
@@ -20,7 +20,7 @@ public class ParticipantDao {
 	public List<Participant> findAll(){
 		
 		return EntityManagerHelper.getEntityManager()
-				.createQuery("select p from Participant as p", Participant.class)
+				.createQuery("select p from Participant p", Participant.class)
 				.getResultList();
 		
 	}
@@ -38,7 +38,7 @@ public class ParticipantDao {
 		EntityManagerHelper.commit();
 	}
 	
-	public void delete(int id) {
+	public void delete(Long id) {
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper.getEntityManager().remove(this.findById(id));
         EntityManagerHelper.commit();        

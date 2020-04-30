@@ -1,34 +1,49 @@
 package rest;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 
-@Path("/hello")
+import Service.ParticipantDao;
+import jpaModel.Participant;
+
+@Path("/participants")
 public class SampleWebService {
 	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String sayHello() {
-		return "Hello, how are you?";
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Participant> getParticipants() {
+		ParticipantDao pdao = new ParticipantDao();
+		return pdao.findAll();
 	}
 	
-	/*
+	
  	
 		@GET
-		@Path("/home")
+		@Path("{id}")
 		@Produces(MediaType.APPLICATION_JSON)
-		public Home getHome() {
-			Home h = new Home();
-			h.setName("toto");
-			Heater h1 = new Heater();
-			h1.setPower("500w");
-			Heater h2 = new Heater();
-			h2.setPower("600w");
-			h.addDevice(h1);
-			h.addDevice(h2);
-			return h;
-		}*/
+		public Participant  getParticipantByName(@PathParam("id") Long id) {
+			ParticipantDao pdao = new ParticipantDao();
+			return pdao.findById(id);
+		}
+		
+		@GET
+		@Path("/query")
+		@Produces(MediaType.APPLICATION_JSON)
+		public List<Participant> getParticipantsWithName(@Context UriInfo info){
+			String firstname = info.getQueryParameters().getFirst("firstname");
+			ParticipantDao pdao = new ParticipantDao();
+			return pdao.findByFirstName(firstname);
+			
+		}
+		
+		
+		
 
 
 }
