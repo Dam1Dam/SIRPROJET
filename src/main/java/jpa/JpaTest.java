@@ -20,7 +20,7 @@ public class JpaTest {
 	public static void main(String[] args) {
 
 		EntityManager manager = EntityManagerHelper.getEntityManager();
-		EntityTransaction tx = manager.getTransaction();
+		//EntityTransaction tx = manager.getTransaction();
 		//tx.begin();
 		System.out.println("test");
 

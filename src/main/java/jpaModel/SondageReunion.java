@@ -20,15 +20,15 @@ public class SondageReunion implements Serializable{
 	private String intitule;
 
 	private boolean isValid;
+	
+	private String url;
+	
 	@Id
 	@GeneratedValue
 	private Long id;
 
-	private String url;
 
 	public SondageReunion() {
-
-		this.setUrl("/"+ String.valueOf(id));
 	}
 
 	public String getUrl() {
