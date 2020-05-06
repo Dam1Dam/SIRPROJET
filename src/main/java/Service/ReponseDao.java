@@ -2,30 +2,30 @@ package Service;
 
 import java.util.List;
 
-import jpaModel.Participant;
+import jpaModel.Reponse;;
 
-public class ParticipantDao {
+public class ReponseDao {
 	
-	public Participant findById(int id) {
-		return EntityManagerHelper.getEntityManager().find(Participant.class, id);
+	public Reponse findById(int id) {
+		return EntityManagerHelper.getEntityManager().find(Reponse.class, id);
 	}
 	
-	public List<Participant> findByFirstName(String firstName){
+	public List<Reponse> findByParticipant(String id){
 		
 		return EntityManagerHelper.getEntityManager()
-				.createQuery("select p from Participant as p where p.prenom = :prenom", Participant.class)
-				.setParameter("prenom", firstName).getResultList();
+				.createQuery("select rep FROM Participant e JOIN e.Reponse rep where e.Reponse = :part", Reponse.class)
+				.setParameter("part", id).getResultList();
 		
 	}
-	public List<Participant> findAll(){
+	public List<Reponse> findAll(){
 		
 		return EntityManagerHelper.getEntityManager()
-				.createQuery("select p from Participant as p", Participant.class)
+				.createQuery("select p from Reponse as p", Reponse.class)
 				.getResultList();
 		
 	}
 	
-	public void addParticipant(Participant p) {
+	public void addResponse(Reponse p) {
 		EntityManagerHelper.beginTransaction();
 		EntityManagerHelper.getEntityManager().persist(p);
 		EntityManagerHelper.commit();
@@ -45,3 +45,4 @@ public class ParticipantDao {
 	
 
 }
+

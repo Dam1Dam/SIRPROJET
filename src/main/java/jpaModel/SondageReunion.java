@@ -1,5 +1,6 @@
 package jpaModel;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class SondageReunion {
+public class SondageReunion implements Serializable{
 
 
 	private static final long serialVersionUID = 1L;

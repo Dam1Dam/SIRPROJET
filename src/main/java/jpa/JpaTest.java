@@ -1,33 +1,53 @@
 package jpa;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.NoResultException;
-import java.util.List;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.PersistenceContext;
 
+import Service.EntityManagerHelper;
 import Service.ParticipantDao;
+import Service.PropositionDao;
 import jpaModel.Participant;
+import jpaModel.Proposition;
 
 public class JpaTest {
 
-	private static EntityManagerFactory Entity_Manager_Factory = Persistence.createEntityManagerFactory("mysql");
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {	
-		
-		ParticipantDao pdao = new ParticipantDao();
-		
-		Participant p = new Participant("damien", "cantin", "damien.cantin@gmail.com");
-		
-		pdao.addParticipant(p);
+	public static void main(String[] args) {
+
+		EntityManager manager = EntityManagerHelper.getEntityManager();
+		EntityTransaction tx = manager.getTransaction();
+		//tx.begin();
+		System.out.println("test");
 
 
+		try {
+			
+			ParticipantDao dao = new ParticipantDao();
+			Participant p = new Participant("cantin", "damien", "damien.cantin@gmail.com");
+			dao.addParticipant(p);
+			System.out.println(dao.findByFirstName("damien"));
+			PropositionDao pdao = new PropositionDao();
+			Proposition prop = new Proposition("20/03/2020", "20/03/2020", "bat7", true);
+			pdao.addProp(prop);
+			
+			pdao.findByPropAccept(true);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//tx.commit();
 
+
+		manager.close();
+		EntityManagerHelper.closeEntityManagerFactory();
+		//		factory.close();
 	}
 
-}
 
+}

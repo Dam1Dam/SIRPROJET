@@ -2,30 +2,30 @@ package Service;
 
 import java.util.List;
 
-import jpaModel.Participant;
+import jpaModel.Sondage;;
 
-public class ParticipantDao {
+public class SondageDao {
 	
-	public Participant findById(int id) {
-		return EntityManagerHelper.getEntityManager().find(Participant.class, id);
+	public Sondage findById(int id) {
+		return EntityManagerHelper.getEntityManager().find(Sondage.class, id);
 	}
 	
-	public List<Participant> findByFirstName(String firstName){
+	public Sondage findByUrl(String url){
 		
 		return EntityManagerHelper.getEntityManager()
-				.createQuery("select p from Participant as p where p.prenom = :prenom", Participant.class)
-				.setParameter("prenom", firstName).getResultList();
+				.createQuery("select s from Sondage as s where s.url = :lien", Sondage.class)
+				.setParameter("lien", url).getSingleResult();
 		
 	}
-	public List<Participant> findAll(){
+	public List<Sondage> findAll(){
 		
 		return EntityManagerHelper.getEntityManager()
-				.createQuery("select p from Participant as p", Participant.class)
+				.createQuery("select p from Sondage as p", Sondage.class)
 				.getResultList();
 		
 	}
 	
-	public void addParticipant(Participant p) {
+	public void addResponse(Sondage p) {
 		EntityManagerHelper.beginTransaction();
 		EntityManagerHelper.getEntityManager().persist(p);
 		EntityManagerHelper.commit();
@@ -45,3 +45,4 @@ public class ParticipantDao {
 	
 
 }
+

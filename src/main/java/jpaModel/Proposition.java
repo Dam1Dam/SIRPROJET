@@ -18,8 +18,8 @@ public class Proposition implements Serializable{
 	@GeneratedValue
 	private Long id;
 	
-	private Date dateDebut;
-	private Date dateFin;
+	private String dateDebut;
+	private String dateFin;
 	private String batiment;
 	private boolean pauseDej;
 	private boolean propositionAcceptee;
@@ -27,22 +27,49 @@ public class Proposition implements Serializable{
 	@ManyToOne()
 	private SondageReunion sondageReunion;
 	
+	
+	public Proposition() {
+		
+	};
+	
+	public Proposition(String dateDebut, String dateFin, String batiment) {
+		this.dateDebut=dateDebut;
+		this.dateFin=dateFin;
+		this.batiment=batiment;
+	}
+	
+	public Proposition(String dateDebut, String dateFin, String batiment,boolean propositionAcceptee ) {
+		this.dateDebut=dateDebut;
+		this.dateFin=dateFin;
+		this.batiment=batiment;
+		this.propositionAcceptee = propositionAcceptee;
+	}
+	
+	public Proposition(String dateDebut, String dateFin, String batiment,boolean propositionAcceptee,SondageReunion sondageReunion ) {
+		this.dateDebut=dateDebut;
+		this.dateFin=dateFin;
+		this.batiment=batiment;
+		this.propositionAcceptee = propositionAcceptee;
+		this.sondageReunion = sondageReunion ;
+	}
+
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getDateDebut() {
+	public String getDateDebut() {
 		return dateDebut;
 	}
-	public void setDateDebut(Date dateDebut) {
+	public void setDateDebut(String dateDebut) {
 		this.dateDebut = dateDebut;
 	}
-	public Date getDateFin() {
+	public String getDateFin() {
 		return dateFin;
 	}
-	public void setDateFin(Date dateFin) {
+	public void setDateFin(String dateFin) {
 		this.dateFin = dateFin;
 	}
 	public String getBatiment() {
